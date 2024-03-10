@@ -1,0 +1,8 @@
+router.get('/:shortCode', async (req, res) => {
+   const { shortCode } = req.params;
+   const shortUrl = await ShortUrl.findOne({ shortCode });
+   if (!shortUrl) {
+       return res.status(404).json({ error: 'Short URL not found' });
+   }
+   res.redirect(shortUrl.longUrl);
+});
